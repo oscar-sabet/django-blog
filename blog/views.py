@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Post
 
@@ -12,6 +12,24 @@ class PostList(generic.ListView):
     # .order_by("-created_on")
     template_name = "blog/index.html"
     paginate_by = 6
+
+
+def post_detail(request, slug):
+    """
+    Display an individual :model:`blog.Post`.
+
+    **Context**
+
+    ``post``
+        An instance of :model:`blog.Post`.
+
+    **Template:**
+
+    :template:`blog/post_detail.html`
+    """
+    template_name = "blog/post_detail.html"
+    post = Post.objects.get(slug=slug)
+    return render(request, template_name, {"post": post})
 
 
 # def my_blog(request):
