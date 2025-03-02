@@ -7,9 +7,11 @@ from .models import Post
 
 # Create your views here.
 class PostList(generic.ListView):
-    queryset = Post.objects.filter(author=2).filter(status=1)
+    queryset = Post.objects.all()
+    # filter(author=2).filter(status=1)
     # .order_by("-created_on")
-    template_name = "post_list.html"
+    template_name = "blog/index.html"
+    paginate_by = 6
 
 
 # def my_blog(request):
